@@ -59,6 +59,7 @@ public class HashRequest extends AbstractRequest<String> {
         return request;
     }
 
+
     @Override
 	public void throwExceptionIfApplicable(HttpResponse response)
 			throws ApplicationException {
@@ -69,6 +70,7 @@ public class HashRequest extends AbstractRequest<String> {
 
 	@Override
     public String processResponse(HttpResponse response) throws ContentIOException {
+        Log.w("HashRequest", "this is it");
         final List<String> lines = new ContentLinesExtractor().extract(response.getEntity());
         for (final String line : lines) {
             if (line.startsWith("{"))
@@ -80,11 +82,7 @@ public class HashRequest extends AbstractRequest<String> {
                     e.printStackTrace();
                 }
             }
-//            if (line.startsWith(saltKey)) {
-//                salt = line.substring(saltKey.length());
-//            }
         }
-        Log.w("HashRequest", "this is it");
 
         client_salt = UUID.randomUUID().toString();
         if(server_salt != null)

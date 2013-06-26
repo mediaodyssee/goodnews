@@ -1,11 +1,16 @@
 package com.gettingmobile.goodnews.account;
 
+import android.os.AsyncTask;
+
 import com.gettingmobile.android.app.actions.ActionContext;
 import com.gettingmobile.goodnews.Application;
 import com.gettingmobile.google.reader.rest.ReaderAuthorizationRequest;
 import com.gettingmobile.google.reader.rest.ReaderHashRequest;
 import com.gettingmobile.google.reader.rest.ReaderTokenRequest;
+import com.gettingmobile.google.rest.HashRequest;
 import com.gettingmobile.rest.RequestCallback;
+
+import static com.gettingmobile.google.rest.HashRequest.*;
 
 public final class CredentialsAccountHandler extends AbstractAccountHandler {
     protected static final String ACCOUNT_TYPE = CredentialsAccountHandler.class.getSimpleName();
@@ -51,26 +56,40 @@ public final class CredentialsAccountHandler extends AbstractAccountHandler {
             getSettings().setUserName(userName);
             getSettings().setPassword(password);
 
+            final RequestCallback<ReaderTokenRequest, String> c =
+                    new RequestCallback<ReaderTokenRequest, String>() {
+                        @Override
+                        public void onRequestProcessed(ReaderTokenRequest request, String result, Throwable error) {
+                            onAuthenticationFinished(callback, error, result);
+                        }
+                    };
+
 
             final RequestCallback<ReaderHashRequest, String> a =
                     new RequestCallback<ReaderHashRequest, String>() {
+                @Override
+                public void onRequestProcessed(final ReaderHashRequest request, String result, Throwable error) {
+                    /*new Thread(new Runnable() {
                         @Override
-                public void onRequestProcessed(ReaderHashRequest request, String result, Throwable error) {
-                    final RequestCallback<ReaderTokenRequest, String> c =
-                            new RequestCallback<ReaderTokenRequest, String>() {
-                                @Override
-                                public void onRequestProcessed(ReaderTokenRequest request, String result, Throwable error) {
-                                    onAuthenticationFinished(callback, error, result);
+                        public void run() {
+                            try {
+                                while(HashRequest.final_hash == null)
+                                {
+                                    Thread.sleep(1000);
                                 }
-                            };
-                    try {
-                        getApp().getRequestHandler().send(new ReaderTokenRequest(userName, password), c);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+
+                                getApp().getRequestHandler().waitAndSend(new ReaderTokenRequest(userName, password), c);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();*/
                 }
-            };
+        };
+
+
             getApp().getRequestHandler().send(new ReaderHashRequest(userName, password), a);
+
         } catch (Throwable t) {
             fireOnLoginFailed(callback, t);
         }

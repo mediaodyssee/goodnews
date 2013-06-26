@@ -10,6 +10,11 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.util.Log;
 
+import com.gettingmobile.google.reader.rest.ReaderHashRequest;
+import com.gettingmobile.google.reader.rest.ReaderTokenRequest;
+import com.gettingmobile.google.rest.HashRequest;
+import com.gettingmobile.google.rest.TokenRequest;
+
 /**
  *
  * @author sven.wiegand
@@ -40,15 +45,22 @@ public final class RequestHandler {
         thread.shutdown();
     }
 
-    public <R extends Request<T>, T> void send(R request, RequestCallback<R, T> callback) 
+    public <R extends Request<T>, T> void send(R request, RequestCallback<R, T> callback)
     		throws InterruptedException {
     	thread.getHandler().post(new AsynchronousRequest<R, T>(request, callback));
     }
-    
+
+
+    public <R extends Request<T>, T> void waitAndSend(final R request, final RequestCallback<R, T> callback)
+            throws InterruptedException {
+            thread.getHandler().post(new AsynchronousRequest<R, T>(request, callback));
+
+    }
+
     public void send(Request<?> request) throws InterruptedException {
     	send(request, null);
     }
-    
+
     final class RequestHandlerThread extends HandlerThread {
     	public final Object initEvent = new Object();
     	private Handler handler;

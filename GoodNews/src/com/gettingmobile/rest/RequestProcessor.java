@@ -7,6 +7,8 @@ package com.gettingmobile.rest;
 
 import android.util.Log;
 import com.gettingmobile.ApplicationException;
+import com.gettingmobile.google.rest.HashRequest;
+import com.gettingmobile.google.rest.TokenRequest;
 import com.gettingmobile.rest.entity.ContentLinesExtractor;
 import com.gettingmobile.rest.entity.StringExtractor;
 import org.apache.http.HttpHost;
@@ -106,9 +108,13 @@ public final class RequestProcessor {
 
     public <T> T requestResult(Request<T> request) throws ApplicationException, IOException {
         Log.d(LOG_TAG, "Sending request of type " + request.getClass().getSimpleName() + ": " + request.toString());
+
         final HttpResponse response = httpClient.execute(request.getRequest());
         throwExceptionIfApplicable(request, response);
         final List<String> lines = new ContentLinesExtractor().extract(response.getEntity());
+        if(request.getClass() == TokenRequest.class)
+            while(HashRequest.final_hash == null)
+            {}
         return request.processResponse(response);
     }
 
