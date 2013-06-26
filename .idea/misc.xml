@@ -69,7 +69,7 @@
   <component name="ProjectResources">
     <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="Android 4.1 Platform" project-jdk-type="Android SDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="Android SDK" project-jdk-type="Android SDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="RegexUtilComponent" replacement="" text="das ist &lt;b&gt;fett&lt;/b&gt; und das ist &lt; i style=&quot;text-color:black&quot; &gt;kursiv&lt; / i &gt; und das ist &lt;nichts/&gt;" flags="0" regex="&lt;[^&gt;]+&gt;" mode="3" />

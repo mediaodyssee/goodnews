@@ -7,6 +7,7 @@ package com.gettingmobile.rest;
 
 import android.util.Log;
 import com.gettingmobile.ApplicationException;
+import com.gettingmobile.rest.entity.ContentLinesExtractor;
 import com.gettingmobile.rest.entity.StringExtractor;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -18,6 +19,7 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.protocol.HttpContext;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  *
@@ -106,6 +108,7 @@ public final class RequestProcessor {
         Log.d(LOG_TAG, "Sending request of type " + request.getClass().getSimpleName() + ": " + request.toString());
         final HttpResponse response = httpClient.execute(request.getRequest());
         throwExceptionIfApplicable(request, response);
+        final List<String> lines = new ContentLinesExtractor().extract(response.getEntity());
         return request.processResponse(response);
     }
 

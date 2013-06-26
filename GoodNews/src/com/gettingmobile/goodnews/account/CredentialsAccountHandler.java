@@ -3,6 +3,8 @@ package com.gettingmobile.goodnews.account;
 import com.gettingmobile.android.app.actions.ActionContext;
 import com.gettingmobile.goodnews.Application;
 import com.gettingmobile.google.reader.rest.ReaderAuthorizationRequest;
+import com.gettingmobile.google.reader.rest.ReaderHashRequest;
+import com.gettingmobile.google.reader.rest.ReaderTokenRequest;
 import com.gettingmobile.rest.RequestCallback;
 
 public final class CredentialsAccountHandler extends AbstractAccountHandler {
@@ -36,7 +38,7 @@ public final class CredentialsAccountHandler extends AbstractAccountHandler {
         authenticate(callback, c.userName, c.password);
 	}
 
-    protected void authenticate(final LoginCallback callback, String userName, String password) {
+    protected void authenticate(final LoginCallback callback, final String userName, final String password) {
         if (callback != null) {
             callback.onLoginStarted();
         }
@@ -49,14 +51,26 @@ public final class CredentialsAccountHandler extends AbstractAccountHandler {
             getSettings().setUserName(userName);
             getSettings().setPassword(password);
 
-            final RequestCallback<ReaderAuthorizationRequest, String> c =
-                    new RequestCallback<ReaderAuthorizationRequest, String>() {
-                @Override
-                public void onRequestProcessed(ReaderAuthorizationRequest request, String result, Throwable error) {
-                    onAuthenticationFinished(callback, error, result);
+
+            final RequestCallback<ReaderHashRequest, String> a =
+                    new RequestCallback<ReaderHashRequest, String>() {
+                        @Override
+                public void onRequestProcessed(ReaderHashRequest request, String result, Throwable error) {
+                    final RequestCallback<ReaderTokenRequest, String> c =
+                            new RequestCallback<ReaderTokenRequest, String>() {
+                                @Override
+                                public void onRequestProcessed(ReaderTokenRequest request, String result, Throwable error) {
+                                    onAuthenticationFinished(callback, error, result);
+                                }
+                            };
+                    try {
+                        getApp().getRequestHandler().send(new ReaderTokenRequest(userName, password), c);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             };
-            getApp().getRequestHandler().send(new ReaderAuthorizationRequest(userName, password), c);
+            getApp().getRequestHandler().send(new ReaderHashRequest(userName, password), a);
         } catch (Throwable t) {
             fireOnLoginFailed(callback, t);
         }
