@@ -22,6 +22,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,8 +49,7 @@ public class TokenRequest extends AbstractRequest<String> {
             jsonObject.put("login", email);
             jsonObject.put("hash", HashRequest.final_hash);
 //            request.setEntity(new UrlEncodedFormEntity(formValues, CharacterSet.UTF8));
-            StringEntity se = new StringEntity(jsonObject.toString());
-            se.setContentEncoding("UTF-8");
+            StringEntity se = new StringEntity(jsonObject.toString(), HTTP.UTF_8);
             se.setContentType("application/json");
             request.setEntity(se);
 

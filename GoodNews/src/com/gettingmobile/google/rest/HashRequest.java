@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -85,25 +86,19 @@ public class HashRequest extends AbstractRequest<String> {
         }
 
         client_salt = UUID.randomUUID().toString();
+        SecureRandom random = new SecureRandom();
         if(server_salt != null)
         {
             byte[] hash = new byte[0];
             try {
                 MessageDigest md = MessageDigest.getInstance("SHA-256");
 
+                byte[] loginPasswordClientSalt = (email+':'+password+':'+client_salt).getBytes();
+
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
-
-//                byte[] loginPasswordClientSalt = (email+password+client_salt).getBytes();
-//                outputStream.write(server_salt.getBytes());
-//                outputStream.write(md.digest(loginPasswordClientSalt));
-//                hash = outputStream.toByteArray();
-//                hash = md.digest(hash);
-                
-
-                byte[] loginPasswordClientSalt = (email+":"+password+":"+client_salt).getBytes();
                 outputStream.write(server_salt.getBytes());
-                outputStream.write(":".getBytes());
-                outputStream.write(md.digest(loginPasswordClientSalt));
+                outputStream.write(':');
+                outputStream.write(hashToString(md.digest(loginPasswordClientSalt)).getBytes());
                 hash = md.digest(outputStream.toByteArray());
 
             } catch (NoSuchAlgorithmException e) {
@@ -111,10 +106,18 @@ public class HashRequest extends AbstractRequest<String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            final_hash = hash.toString();
+
+            final_hash = hashToString(hash);
         }
         Log.w("HashRequest", "end");
         return final_hash;
     }
 
+    String hashToString(byte[] hash)
+    {
+        StringBuffer result = new StringBuffer();
+        for (byte byt : hash)
+            result.append(Integer.toString((byt & 0xff) + 0x100, 16).substring(1));
+        return result.toString();
+    }
 }
