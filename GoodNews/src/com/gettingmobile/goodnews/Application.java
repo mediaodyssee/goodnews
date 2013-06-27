@@ -202,7 +202,7 @@ public class Application extends android.app.Application implements SyncContext 
 
     public void authenticate(String authToken) {
         authenticator.setAuthToken(authToken);
-        authenticator.setEditToken(null);
+        authenticator.setEditToken(authToken);
         getSettings().setAuthToken(authToken);
     }
 

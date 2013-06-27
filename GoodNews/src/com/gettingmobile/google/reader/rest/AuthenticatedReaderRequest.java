@@ -22,7 +22,7 @@ public abstract class AuthenticatedReaderRequest<R extends HttpRequestBase, T> e
 	protected void initRequest(R request) {
 		super.initRequest(request);
         if (authenticator != null) {
-		    request.setHeader("Authorization", "GoogleLogin auth=" + authenticator.getAuthToken());
+		    request.setHeader("X-Authorization", authenticator.getAuthToken());
         }
 	}
 

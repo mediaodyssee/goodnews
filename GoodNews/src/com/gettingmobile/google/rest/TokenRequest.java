@@ -35,7 +35,8 @@ import java.util.List;
  * @author sven.wiegand
  */
 public class TokenRequest extends AbstractRequest<String> {
-    private final String authTokenKey = "Token";
+    private final String authTokenKey = "token";
+    private final String TTLKey = "TTL";
     private final HttpPost request;
 
     public TokenRequest(String email, String password) {
@@ -80,9 +81,17 @@ public class TokenRequest extends AbstractRequest<String> {
 
         final List<String> lines = new ContentLinesExtractor().extract(response.getEntity());
         for (final String line : lines) {
-            if (line.startsWith(authTokenKey)) {
-                return line.substring(authTokenKey.length());
+            String token = null;
+            if (line.startsWith("{")) {
+                try {
+                    JSONObject jsonObject = new JSONObject(line);
+                    token = jsonObject.getString(authTokenKey);
+                    String ttl = jsonObject.getString(TTLKey);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
+            return token;
         }
         return null;
     }

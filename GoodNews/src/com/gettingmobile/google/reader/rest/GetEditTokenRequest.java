@@ -12,7 +12,7 @@ import com.gettingmobile.rest.entity.StringExtractor;
 public class GetEditTokenRequest extends AuthenticatedReaderRequest<HttpGet, String> {
 	public GetEditTokenRequest(Authenticator authenticator)
 		throws URISyntaxException {
-		super("/api/0/token", authenticator);		
+		super("/api/0/token", authenticator);
 	}
 
 	@Override
