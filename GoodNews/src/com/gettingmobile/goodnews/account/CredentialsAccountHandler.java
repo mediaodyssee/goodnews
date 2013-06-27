@@ -69,29 +69,20 @@ public final class CredentialsAccountHandler extends AbstractAccountHandler {
                     new RequestCallback<ReaderHashRequest, String>() {
                 @Override
                 public void onRequestProcessed(final ReaderHashRequest request, String result, Throwable error) {
-                    /*new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                while(HashRequest.final_hash == null)
-                                {
-                                    Thread.sleep(1000);
-                                }
-
-                                getApp().getRequestHandler().waitAndSend(new ReaderTokenRequest(userName, password), c);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }).start();*/
+                    try {
+                        getApp().getRequestHandler().waitAndSend(new ReaderTokenRequest(userName, password), c);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
+
         };
 
 
-            getApp().getRequestHandler().send(new ReaderHashRequest(userName, password), a);
+        getApp().getRequestHandler().send(new ReaderHashRequest(userName, password), a);
 
-        } catch (Throwable t) {
-            fireOnLoginFailed(callback, t);
+    } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 

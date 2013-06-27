@@ -70,7 +70,7 @@ public class HashRequest extends AbstractRequest<String> {
 
 	@Override
     public String processResponse(HttpResponse response) throws ContentIOException {
-        Log.w("HashRequest", "this is it");
+        Log.w("HashRequest", "start");
         final List<String> lines = new ContentLinesExtractor().extract(response.getEntity());
         for (final String line : lines) {
             if (line.startsWith("{"))
@@ -90,16 +90,21 @@ public class HashRequest extends AbstractRequest<String> {
             byte[] hash = new byte[0];
             try {
                 MessageDigest md = MessageDigest.getInstance("SHA-256");
+
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
-                outputStream.write(email.getBytes());
-                outputStream.write(password.getBytes());
-                outputStream.write(client_salt.getBytes());
-                byte[] toHash = outputStream.toByteArray();
-                outputStream.reset();
+
+//                byte[] loginPasswordClientSalt = (email+password+client_salt).getBytes();
+//                outputStream.write(server_salt.getBytes());
+//                outputStream.write(md.digest(loginPasswordClientSalt));
+//                hash = outputStream.toByteArray();
+//                hash = md.digest(hash);
+                
+
+                byte[] loginPasswordClientSalt = (email+":"+password+":"+client_salt).getBytes();
                 outputStream.write(server_salt.getBytes());
-                outputStream.write(md.digest(toHash));
-                toHash = outputStream.toByteArray();
-                hash = md.digest(toHash);
+                outputStream.write(":".getBytes());
+                outputStream.write(md.digest(loginPasswordClientSalt));
+                hash = md.digest(outputStream.toByteArray());
 
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
@@ -108,6 +113,7 @@ public class HashRequest extends AbstractRequest<String> {
             }
             final_hash = hash.toString();
         }
+        Log.w("HashRequest", "end");
         return final_hash;
     }
 

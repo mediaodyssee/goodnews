@@ -111,10 +111,10 @@ public final class RequestProcessor {
 
         final HttpResponse response = httpClient.execute(request.getRequest());
         throwExceptionIfApplicable(request, response);
-        final List<String> lines = new ContentLinesExtractor().extract(response.getEntity());
-        if(request.getClass() == TokenRequest.class)
-            while(HashRequest.final_hash == null)
-            {}
+//        final List<String> lines = new ContentLinesExtractor().extract(response.getEntity());
+//        if(request.getClass() == TokenRequest.class)
+//            while(HashRequest.final_hash == null)
+//            {}
         return request.processResponse(response);
     }
 

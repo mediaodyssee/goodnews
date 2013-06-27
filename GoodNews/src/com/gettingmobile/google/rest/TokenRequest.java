@@ -41,7 +41,7 @@ public class TokenRequest extends AbstractRequest<String> {
         super();
         request = new HttpPost(UriFactory.createUri("http://www.wamigo.com/rest/resource/token"));
 
-        Log.w("TokenRequest", "this is it");
+        Log.w("TokenRequest", "start");
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("client_salt", HashRequest.client_salt);
@@ -76,6 +76,8 @@ public class TokenRequest extends AbstractRequest<String> {
 
 	@Override
     public String processResponse(HttpResponse response) throws ContentIOException {
+        Log.w("TokenRequest", "end");
+
         final List<String> lines = new ContentLinesExtractor().extract(response.getEntity());
         for (final String line : lines) {
             if (line.startsWith(authTokenKey)) {
