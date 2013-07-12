@@ -134,6 +134,7 @@ public final class AccountManagerHandler extends AbstractAccountHandler {
 
 	private void invalidateSession() {
 		final String authToken = getSettings().getAuthToken();
+		final Long  authToken_Date= getSettings().getAuthTokenDate();
 		if (authToken != null) {
 			accountManager.invalidateAuthToken(MANAGED_ACCOUNT_TYPE, authToken);
 		}

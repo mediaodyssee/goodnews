@@ -23,7 +23,7 @@ public class GetItemsByReferenceRequest extends FormDataRequest<ItemStream> {
 		super.setFormValues(formValues);
 
         for (long ref : itemReferences) {
-            formValues.add(new BasicNameValuePair("i", Long.toString(ref)));
+            formValues.add(new BasicNameValuePair("i[]", Long.toString(ref)));
         }
 	}
 

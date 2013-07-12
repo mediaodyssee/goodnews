@@ -172,11 +172,16 @@ public final class Settings extends AbstractSettings implements SyncSettings, Ti
 	public String getAuthToken() {
 		return getString("auth_token");
 	}
-	
+
+    public Long getAuthTokenDate() {
+        return getLong("auth_token_date");
+    }
+
 	public void setAuthToken(String authToken) {
 		final SharedPreferences.Editor editor = prefs.edit();
 		editor.putString("auth_token", authToken);
-		editor.commit();		
+		editor.putLong("auth_token_date", System.currentTimeMillis());
+		editor.commit();
 	}
 
     /*
@@ -803,4 +808,6 @@ public final class Settings extends AbstractSettings implements SyncSettings, Ti
     public void setAutoShowUsageTips(boolean show) {
         setBoolean("tips_auto_show", show);
     }
+
+
 }

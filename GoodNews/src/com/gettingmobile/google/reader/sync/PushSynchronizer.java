@@ -55,7 +55,7 @@ public final class PushSynchronizer extends AbstractSynchronizer {
         /*
          * request edit token if required
          */
-        requestEditTokenIfRequired(callback);
+        //requestEditTokenIfRequired(callback);
         
         /*
          * send the change events to google reader

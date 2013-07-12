@@ -12,7 +12,7 @@ public abstract class SortedElementJsonAdapter<T extends SortedElement> extends 
 		final T e = super.read(json);
 		
 		e.setSortId(json.getString("sortid"));
-		
+
 		return e;
 	}
 

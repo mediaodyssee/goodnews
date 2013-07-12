@@ -1,8 +1,8 @@
 package com.gettingmobile.google;
 
 public final class StaticAuthenticator implements Authenticator {
-	public static final int AUTH_TOKEN_TIMEOUT_MS = 1000 /*ms*/ * 60 /*s*/ * 60 /*min*/ * 12 /*h*/; // we assume 12 hours
-	public static final int EDIT_TOKEN_TIMEOUT_MS = 1000 /*ms*/ * 60 /*s*/ * 30 /*min*/; // we assume 30 minutes
+	public static final int AUTH_TOKEN_TIMEOUT_MS = 1000 /*ms*/ * 60 /*s*/ * 60 /*min*/ * 24 /*h*/ * 30 /*d*/; // we assume 30days
+	public static final int EDIT_TOKEN_TIMEOUT_MS = 1000 /*ms*/ * 60 /*s*/ * 60 /*min*/ * 24 /*h*/ * 30 ; // we assume 30 minutes
 	private String authToken = "";
 	private long authTokenTimestamp = 0;
 	private String editToken = "";

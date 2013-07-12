@@ -18,7 +18,7 @@ import java.net.URISyntaxException;
  */
 public abstract class ReaderRequest<R extends HttpRequestBase, T> extends AbstractRequest<T> {
 //    protected static final String BASE_URI = "http://www.wamigo.com/greader­api";
-    protected static final String BASE_URI = "http://api.back.gluchet.dev.mo-si.eu/greader-api";
+    protected static final String BASE_URI = "http://api.back.testing.dev.mo-si.eu/greader-api";
     protected static final int MAX_URI_LENGTH = 2048;
     private final URI uri;
     private HttpUriRequest request = null;

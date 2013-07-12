@@ -45,7 +45,7 @@ public class ChangeItemTagRequest extends FormDataRequest<Boolean> {
         formValues.add(new BasicNameValuePair("T", authenticator.getEditToken()));
         formValues.add(new BasicNameValuePair("async", "false"));
         for (ElementId feedId : feedIds) {
-        	formValues.add(new BasicNameValuePair("s", feedId.getId()));
+        	formValues.add(new BasicNameValuePair("s[]", feedId.getId()));
         }
         for (ElementId itemId : itemIds) {
         	formValues.add(new BasicNameValuePair("i", itemId.getId()));
