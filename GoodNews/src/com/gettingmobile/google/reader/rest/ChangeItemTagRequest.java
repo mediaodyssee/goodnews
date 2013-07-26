@@ -48,7 +48,7 @@ public class ChangeItemTagRequest extends FormDataRequest<Boolean> {
         	formValues.add(new BasicNameValuePair("s[]", feedId.getId()));
         }
         for (ElementId itemId : itemIds) {
-        	formValues.add(new BasicNameValuePair("i", itemId.getId()));
+        	formValues.add(new BasicNameValuePair("i[]", itemId.getId()));
         }
         if (addTag != null) {
             formValues.add(new BasicNameValuePair("a", addTag.getId()));

@@ -151,14 +151,16 @@ public final class AccountManagerHandler extends AbstractAccountHandler {
 	public void promptAccount(final ActionContext actionContext, final LoginCallback callback) {
         super.promptAccount(actionContext, callback);
 
-        final Account[] accounts = getAccounts();
-        final String[] accountNames = new String[accounts.length + 2];
-        for (int i = 0; i < accounts.length; ++i) {
-            accountNames[i] = accounts[i].name;
-        }
-        accountNames[accounts.length] = getString(R.string.account_create);
-        accountNames[accounts.length + 1] = getString(R.string.account_manual);
-
+        final Account[] accounts = new Account[0];
+//        final String[] accountNames = new String[accounts.length + 2];
+//        for (int i = 0; i < accounts.length; ++i) {
+//            accountNames[i] = accounts[i].name;
+//        }
+//        accountNames[accounts.length] = getString(R.string.account_create);
+//        accountNames[accounts.length + 1] = getString(R.string.account_manual);
+        final String[] accountNames = new String[2];
+        accountNames[0] = getString(R.string.account_create);
+        accountNames[1] = getString(R.string.account_manual);
         promptDialog = new AlertDialog.Builder(actionContext.getActivity())
             .setTitle(R.string.account_select_title)
             .setItems(accountNames, new OnClickListener() {
