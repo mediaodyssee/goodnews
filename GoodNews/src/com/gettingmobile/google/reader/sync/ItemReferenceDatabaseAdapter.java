@@ -20,7 +20,7 @@ public class ItemReferenceDatabaseAdapter extends AbstractDatabaseAdapter<ItemRe
     }
 
     public void updateItemReadMarks(SQLiteDatabase db) {
- //       db.execSQL("UPDATE item SET read=1, syncedRead=1");
+        db.execSQL("UPDATE item SET read=1, syncedRead=1");
         db.execSQL("UPDATE item SET read=0, syncedRead=0 WHERE refId IN (SELECT r.refId FROM tmpItemReference r)");
     }
 
