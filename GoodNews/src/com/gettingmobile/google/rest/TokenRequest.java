@@ -41,7 +41,7 @@ public class TokenRequest extends AbstractRequest<String> {
 
     public TokenRequest(String email, String password) {
         super();
-        request = new HttpPost(UriFactory.createUri("http://main.front.testing.dev.mo-si.eu/rest/resource/token"));
+        request = new HttpPost(UriFactory.createUri("http://www.wamigo.com/rest/resource/token"));
 
         Log.w("TokenRequest", "start");
         try {

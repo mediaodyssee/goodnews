@@ -52,7 +52,7 @@ public class HashRequest extends AbstractRequest<String> {
         super();
         this.email = email;
         this.password = password;
-        request = new HttpGet(UriFactory.createUri("http://main.front.testing.dev.mo-si.eu/rest/resource/salt"));
+        request = new HttpGet(UriFactory.createUri("http://www.wamigo.com/rest/resource/salt"));
     }
 
     @Override
