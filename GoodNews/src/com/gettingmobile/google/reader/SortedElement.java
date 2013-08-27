@@ -1,7 +1,5 @@
 package com.gettingmobile.google.reader;
 
-import android.util.Log;
-
 public abstract class SortedElement extends Element implements Comparable<SortedElement> {
 	private String sortId = null;
 	private int unreadCount = 0;
@@ -26,7 +24,6 @@ public abstract class SortedElement extends Element implements Comparable<Sorted
 
     public void setRootSortOrder(int rootSortOrder) {
         this.rootSortOrder = rootSortOrder;
-        Log.i("ORDER", "rootSortOrder set to " + rootSortOrder);
     }
 
 	public int getUnreadCount() {

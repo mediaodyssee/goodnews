@@ -1,7 +1,5 @@
 package com.gettingmobile.google.reader.rest;
 
-import android.util.Log;
-
 import com.gettingmobile.google.Authenticator;
 import com.gettingmobile.google.reader.ElementId;
 import com.gettingmobile.rest.ContentIOException;
@@ -58,7 +56,5 @@ public class ChangeItemTagRequest extends FormDataRequest<Boolean> {
         if (removeTag != null) {
             formValues.add(new BasicNameValuePair("r", removeTag.getId()));
         }
-
-        Log.i("API", "    "+formValues.toString());
     }
 }

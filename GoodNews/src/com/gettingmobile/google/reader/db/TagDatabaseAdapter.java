@@ -79,8 +79,7 @@ public class TagDatabaseAdapter extends SortedElementDatabaseAdapter<Tag> {
 		final Tag label = super.readCurrent(c);
 		
 		label.setFeedFolder(c.getInt(c.getColumnIndex(IS_FEED_FOLDER)) != 0);
-        int res = c.getInt(c.getColumnIndex(SORT_ORDER));
-        label.setRootSortOrder(res);//c.getInt(c.getColumnIndex(SORT_ORDER)));
+        label.setRootSortOrder(c.getInt(c.getColumnIndex(SORT_ORDER)));
 
 		return label;
 	}

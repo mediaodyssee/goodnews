@@ -66,7 +66,7 @@ public final class PullSynchronizer extends AbstractSynchronizer {
         } finally {
             db.endTransaction();
         }
-        Log.d(LOG_TAG, "Il était une fois " + itemAdapter.readUnreadCount(db) + " items...");
+
         /*
          * fetch read list item references to be able to determine progress
          */
@@ -108,7 +108,7 @@ public final class PullSynchronizer extends AbstractSynchronizer {
          */
         final int newUnreadItemCount = fetchAndProcessUnknownItems(callback);
         callback.setNewUnreadCount(newUnreadItemCount);
-        Log.d(LOG_TAG, "Avant le cleanUp " + itemAdapter.readUnreadCount(db));
+
         /*
          * clean up
          */
@@ -146,8 +146,6 @@ public final class PullSynchronizer extends AbstractSynchronizer {
          * cleanup no longer required files
          */
         CleanupService.start(context.getContext());
-
-        Log.d(LOG_TAG, "Fin " + itemAdapter.readUnreadCount(db));
 	}
 
     /*
