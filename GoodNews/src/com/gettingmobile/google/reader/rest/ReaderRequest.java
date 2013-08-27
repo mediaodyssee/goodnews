@@ -5,6 +5,8 @@
 
 package com.gettingmobile.google.reader.rest;
 
+import android.util.Log;
+
 import com.gettingmobile.rest.AbstractRequest;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -26,6 +28,7 @@ public abstract class ReaderRequest<R extends HttpRequestBase, T> extends Abstra
     protected ReaderRequest(String relativeUri) throws URISyntaxException {
     	super();
 		uri = new URI(BASE_URI + relativeUri);
+        Log.i("API", uri.toString());
     }
 
     protected URI getUri() {

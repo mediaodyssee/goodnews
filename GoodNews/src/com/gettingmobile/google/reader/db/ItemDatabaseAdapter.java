@@ -392,6 +392,7 @@ public class ItemDatabaseAdapter extends ElementDatabaseAdapter<Item> {
 			return c.moveToFirst() ? c.getInt(0) : 0;
 		} finally {
 			c.close();
+
 		}
 	}
 

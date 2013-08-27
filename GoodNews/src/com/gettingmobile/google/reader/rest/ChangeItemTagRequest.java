@@ -1,5 +1,7 @@
 package com.gettingmobile.google.reader.rest;
 
+import android.util.Log;
+
 import com.gettingmobile.google.Authenticator;
 import com.gettingmobile.google.reader.ElementId;
 import com.gettingmobile.rest.ContentIOException;
@@ -22,7 +24,7 @@ public class ChangeItemTagRequest extends FormDataRequest<Boolean> {
 			Collection<ElementId> feedIds, Collection<ElementId> itemIds, 
 			ElementId addTag, ElementId removeTag) throws URISyntaxException {
 		super("edit-tag", authenticator);
-		
+
 		if (itemIds.size() != feedIds.size())
 			throw new IllegalArgumentException("There must be one feed ID for each item ID");
 		
@@ -56,5 +58,7 @@ public class ChangeItemTagRequest extends FormDataRequest<Boolean> {
         if (removeTag != null) {
             formValues.add(new BasicNameValuePair("r", removeTag.getId()));
         }
-	}
+
+        Log.i("API", "    "+formValues.toString());
+    }
 }

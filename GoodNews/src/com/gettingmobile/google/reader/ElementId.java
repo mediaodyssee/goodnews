@@ -85,7 +85,7 @@ public final class ElementId implements Comparable<ElementId> {
         if (!m.matches())
             throw new IllegalArgumentException("ElementID '" + id + "' doesn't match ITEM ID pattern.");
 
-        return new BigInteger(m.group(1), 16).longValue();
+        return new BigInteger(m.group(1)).longValue();
     }
 	
 	public ElementType getType() {
@@ -94,7 +94,7 @@ public final class ElementId implements Comparable<ElementId> {
 
 	@Override
 	public int compareTo(ElementId o) {
-		return id.compareTo(o.id) ;
+		return id.compareTo(o.id);
 	}
 
 	@Override

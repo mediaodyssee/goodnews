@@ -10,7 +10,7 @@ public enum ItemState {
 
 	private final ElementId id;
 	private ItemState(String id) {
-		this.id = new ElementId("user/-/state/com.google/" + id);
+		this.id = new ElementId("user/-/state/com.wamigo/" + id);
 	}
 	
 	public ElementId getId() {

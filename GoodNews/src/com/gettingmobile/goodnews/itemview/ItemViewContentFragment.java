@@ -191,7 +191,8 @@ public final class ItemViewContentFragment extends RoboSherlockFragment
         Log.i(LOG_TAG, "starting web view initialization");
         final LinearLayout contentViewContainer = (LinearLayout) root.findViewById(R.id.item_content_container);
         //noinspection deprecation
-        WebView.enablePlatformNotifications();
+        //
+        // WebView.enablePlatformNotifications();
         contentView = WebViewWithTitle.createInstance(getAppActivity());
         contentViewContainer.addView(contentView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1));
         contentView.setTitle(R.layout.item_title);

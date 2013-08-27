@@ -66,7 +66,7 @@ public final class PullSynchronizer extends AbstractSynchronizer {
         } finally {
             db.endTransaction();
         }
-
+        Log.d(LOG_TAG, "Il était une fois " + itemAdapter.readUnreadCount(db) + " items...");
         /*
          * fetch read list item references to be able to determine progress
          */
@@ -108,7 +108,7 @@ public final class PullSynchronizer extends AbstractSynchronizer {
          */
         final int newUnreadItemCount = fetchAndProcessUnknownItems(callback);
         callback.setNewUnreadCount(newUnreadItemCount);
-
+        Log.d(LOG_TAG, "Avant le cleanUp " + itemAdapter.readUnreadCount(db));
         /*
          * clean up
          */
@@ -131,6 +131,7 @@ public final class PullSynchronizer extends AbstractSynchronizer {
         } finally {
             db.endTransaction();
         }
+
         settings.updateLastSuccessfulPullTimestamp();
         callback.incrementProgress();
         callback.setUnreadCount(itemAdapter.readUnreadCount(db));
@@ -145,6 +146,8 @@ public final class PullSynchronizer extends AbstractSynchronizer {
          * cleanup no longer required files
          */
         CleanupService.start(context.getContext());
+
+        Log.d(LOG_TAG, "Fin " + itemAdapter.readUnreadCount(db));
 	}
 
     /*
@@ -209,6 +212,7 @@ public final class PullSynchronizer extends AbstractSynchronizer {
                 /*
                  * delete items older than time to keep unread
                  */
+
                 final Calendar minUnreadToCleanupTimestamp = getPastTimestamp(settings.getDaysToCleanupUnread());
                 Log.i(LOG_TAG, "minUnreadToCleanupTimestamp=" + minUnreadToCleanupTimestamp.getTimeInMillis() + " (" + minUnreadToCleanupTimestamp + ")");
                 itemReferenceAdapter.deleteOlder(db, minUnreadToCleanupTimestamp);
@@ -228,7 +232,6 @@ public final class PullSynchronizer extends AbstractSynchronizer {
                  * restrict number of references for unknown, unread items to the max number configured by the user
                  */
                 itemReferenceAdapter.keepNewest(db, settings.getMaxUnreadSync());
-
                 db.setTransactionSuccessful();
             } finally {
                 db.endTransaction();
@@ -447,7 +450,7 @@ public final class PullSynchronizer extends AbstractSynchronizer {
             final ItemStream items = sendRequest(new GetItemsByReferenceRequest(
                     authenticator, getItemReferenceIdsPage(refs, i, pageSize)));
             try {
-                unreadCount+= writeItemList(callback, items, getItemReferencePageMap(refs, i, pageSize));
+                unreadCount += writeItemList(callback, items, getItemReferencePageMap(refs, i, pageSize));
             } finally {
                 IOUtils.closeQuietly(items);
             }
