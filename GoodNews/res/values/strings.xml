@@ -19,8 +19,8 @@
 	<!-- content pane messages -->    
     <string name="no_content">no items</string>
     <string name="no_content_show_read">no unread items\ntap to show read items</string>
-    <string name="no_content_fetch_old">no items\ntap to fetch old articles from Google Reader</string>
-    <string name="no_content_sync">no items\ntap to sync with Google Reader</string>
+    <string name="no_content_fetch_old">no items\ntap to fetch old articles from Wamigo</string>
+    <string name="no_content_sync">no items\ntap to sync with Wamigo</string>
     <string name="content_loading">Loading content...</string>
     <string name="wait">Please wait...</string>
 
@@ -36,8 +36,8 @@
     <string name="sync_notify_title">GoodNews Synchronization</string>
     <string name="sync_cancel_confirmation">Do you want to cancel the synchronization?</string>
     <string name="sync_title">Synchronization</string>
-    <string name="sync_progress">Synchronizing with Google Reader</string>
-    <string name="sync_failed_connection">Connection to Google Reader failed.</string>
+    <string name="sync_progress">Synchronizing with Wamigo</string>
+    <string name="sync_failed_connection">Connection to Wamigo failed, please retry.</string>
     <string name="sync_failed_storage">Storage full or write protected</string>
     <string name="sync_failed_device_storage_low">Device storage low. See storage settings.</string>
     <string name="sync_failed_device_storage_low_long">Device storage is low! To prevent your device storage from running full, synchronization isn\'t possible by default if the device storage is low.\n\nChange the relevant option in the storage settings to enable synchronization anyway.</string>
@@ -84,13 +84,13 @@
     <string name="account_create">Create a new account</string>
     <string name="account_manual">Login with e-mail-address and password</string>
     <string name="login_title">Login</string>
-    <string name="login_credentials_msg">Enter the information for your Google Reader account.</string>
+    <string name="login_credentials_msg">Enter the information for your Wamigo account.</string>
     <string name="login_username">your e-mail address</string>
     <string name="login_password">your password</string>
     <string name="login_button">Login</string>
     <string name="login_incomplete">You need to enter a username and a password.</string>
     <string name="login_failed">Login failed</string>
-    <string name="login_credentials_missing">No Google Reader account has been specified.</string>
+    <string name="login_credentials_missing">No Wamigo account has been specified.</string>
     
     <!-- update -->
     <string name="update_title">Update</string>
@@ -130,7 +130,7 @@
     <!-- blacklist -->
     <string name="blacklist_title">Delete Article</string>
     <string name="blacklist_message">This deletes the article from GoodNews and adds it to the article blacklist, so that it will not appear in GoodNews again.
-        \n\nYou should only do this if the known Google Reader bug prevents you from removing the article from a label as described at http://goodnews.uservoice.com/knowledgebase/articles/67690.
+        \n\nYou should only do this if the known Wamigo bug prevents you from removing the article from a label as described at http://goodnews.uservoice.com/knowledgebase/articles/67690.
         You can reset the blacklist in \"Settings &gt; Other\".
         \n\nDo you want to delete the article?
     </string>
@@ -195,8 +195,8 @@
     <string name="pref_actions">Actions</string>
 
     <!-- account -->
-    <string name="pref_account">Google Reader Account</string>
-    <string name="pref_account_summary">Select your Google account to be used to login to Google Reader</string>
+    <string name="pref_account">Wamigo Account</string>
+    <string name="pref_account_summary">Select your Google account to be used to login to Wamigo</string>
 
     <!-- sync preferences -->
 	<string name="pref_sync">Synchronization</string>
@@ -219,7 +219,7 @@
 
 	<string name="pref_sync_push">Local Changes</string>
 	<string name="pref_sync_push_immediately">Immediate push</string>
-	<string name="pref_sync_push_immediately_summary">Whether to push local changes immediately to Google Reader or only on synchronization</string>
+	<string name="pref_sync_push_immediately_summary">Whether to push local changes immediately to Wamigo or only on synchronization</string>
     <string name="pref_sync_notify_unread">Notify unread items</string>
     <string name="pref_sync_notify_unread_summary">Notify when new unread articles are available after a sync</string>
 	<string name="pref_sync_labels">Special tag names</string>
@@ -241,13 +241,13 @@
 
 	<string name="pref_sync_item_max_choice">Number of Items</string>
 
-    <string name="pref_sync_fixes">Google Reader Fixes</string>
+    <string name="pref_sync_fixes">Wamigo Fixes</string>
     <string name="pref_sync_fix_duplicate_items">Avoid duplicate articles</string>
-    <string name="pref_sync_fix_duplicate_items_summary">Hides article duplicates and marks them as read. Duplicate articles may occur due to an error in Google Reader.</string>
+    <string name="pref_sync_fix_duplicate_items_summary">Hides article duplicates and marks them as read. Duplicate articles may occur due to an error in Wamigo.</string>
 
     <string name="pref_sync_dismiss_local_changes">Dismiss local Changes</string>
     <string name="pref_sync_dismiss_local_changes_summary">Drop all local changes made to read state and tag assignments</string>
-    <string name="pref_sync_dismiss_local_changes_confirmation">This will prevent all changes made locally since the last synchronization from being synchronized to Google Reader. Do you want to continue?</string>
+    <string name="pref_sync_dismiss_local_changes_confirmation">This will prevent all changes made locally since the last synchronization from being synchronized to Wamigo. Do you want to continue?</string>
 
     <!-- UI preferences -->
     <string name="pref_ui">User Interface</string>
@@ -269,10 +269,10 @@
     <string name="pref_view_category_filtering_sorting">Filtering &amp; Sorting</string>
 
     <string name="pref_sort_strategy">Tag/subscription sorting</string>
-    <string name="pref_sort_strategy_summary">Sort tags and subscriptions exactly as in Google Reader</string>
+    <string name="pref_sort_strategy_summary">Sort tags and subscriptions exactly as in Wamigo</string>
     <string name="pref_sort_strategy_choice_title">Sort strategy</string>
     <string name="pref_sort_strategy_choice_alphabetically">alphabetically</string>
-    <string name="pref_sort_strategy_choice_dragndrop">Drag &amp; drop from Google Reader</string>
+    <string name="pref_sort_strategy_choice_dragndrop">Drag &amp; drop from Wamigo</string>
 
     <string name="pref_hide_read">Hide read items</string>
     <string name="pref_hide_read_summary">Hide read folders, subscriptions and articles in list</string>
