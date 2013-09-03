@@ -28,7 +28,6 @@ public abstract class ReaderRequest<R extends HttpRequestBase, T> extends Abstra
     protected ReaderRequest(String relativeUri) throws URISyntaxException {
     	super();
 		uri = new URI(BASE_URI + relativeUri);
-        Log.i("API", uri.toString());
     }
 
     protected URI getUri() {
